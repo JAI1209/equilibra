@@ -1,0 +1,255 @@
+/* ===============================
+   EQUILIBRA – NEXT LEVEL STYLES
+   (Ink‑Child Integrated)
+   =============================== */
+
+/* CSS Custom Properties (design tokens) */
+:root {
+  --bg-primary: #2D0A1A;
+  --bg-deep: #1A050E;
+  --glass-bg: rgba(20, 5, 10, 0.3);
+  --glass-border: rgba(255, 200, 200, 0.08);
+  --glass-highlight: rgba(255, 220, 220, 0.12);
+  --text-primary: #ffffff;
+  --text-accent: #FFCDD2;
+  --ink-child-glow: rgba(255, 200, 200, 0.8);
+  --symbol-stroke: rgba(183, 50, 37, 0.9);
+  --shadow-glow: 0 0 60px rgba(110, 26, 55, 0.5), 0 0 120px rgba(129, 11, 56, 0.25);
+  --transition-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --font-heading: 'Rajdhani', 'Arial', sans-serif;
+  --font-body: 'Inter', 'Arial', sans-serif;
+}
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Smooth scrolling & font rendering */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--bg-primary);
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+/* ---------- KEYFRAMES – Next Level ---------- */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes softSlideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(40px) scale(0.98);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+@keyframes liquidBackground {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- INTRO OVERLAY – Cinematic Depth ---------- */
+.intro-container {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: 
+    radial-gradient(ellipse at 40% 40%, #5C1630 0%, #1A0A1A 70%),
+    radial-gradient(circle at 80% 20%, rgba(255, 200, 200, 0.06) 0%, transparent 50%);
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+
+/* Subtle animated grain / stars overlay */
+.intro-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  animation: pulseGlow 8s ease-in-out infinite alternate;
+}
+
+.intro-logo {
+  width: min(450px, 60vw);
+  opacity: 0;
+  animation: fadeIn 1.8s var(--transition-smooth) 0.3s forwards;
+  filter: drop-shadow(0 0 30px rgba(255, 180, 180, 0.4)) 
+          drop-shadow(0 0 10px rgba(129, 11, 56, 0.7));
+  z-index: 2;
+}
+
+.intro-title {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 6vw, 48px);
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: softSlideUp 1.2s var(--transition-smooth) 2s forwards;
+  margin-top: 32px;
+  text-shadow: 0 0 25px rgba(255, 200, 200, 0.6);
+  z-index: 2;
+}
+
+.intro-tagline {
+  color: var(--text-accent);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: softSlideUp 1.2s var(--transition-smooth) 3s forwards;
+  margin-top: 16px;
+  z-index: 2;
+  backdrop-filter: blur(2px);
+}
+
+/* ---------- GLOBAL GLASS STYLE ---------- */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border: 1px solid var(--glass-border);
+  border-radius: 28px;
+  box-shadow: 
+    var(--shadow-glow),
+    inset 0 1px 0 var(--glass-highlight);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+  box-shadow: 
+    0 0 80px rgba(110, 26, 55, 0.7),
+    0 0 150px rgba(129, 11, 56, 0.35),
+    inset 0 1px 0 var(--glass-highlight);
+}
+
+/* ---------- INPUT AUTO-FILL MAGIC ---------- */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px rgba(40, 10, 20, 0.9) inset;
+  -webkit-text-fill-color: white;
+  transition: background-color 9999s ease-in-out 0s;
+  border: 1px solid rgba(255, 200, 200, 0.3);
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 300;
+}
+
+/* ---------- EXTRA POLISH: Glowing focus ---------- */
+input:focus {
+  outline: none;
+  border-color: rgba(255, 200, 200, 0.5);
+  box-shadow: 0 0 25px rgba(255, 200, 200, 0.15);
+}
+
+/* ============================================
+   INK‑CHILD ANIMATION STYLES
+   ============================================ */
+
+/* Container for the whole ink‑child scene – placed behind UI */
+.ink-child-container {
+  position: fixed;
+  inset: 0;
+  z-index: 1;           /* behind the glass card */
+  pointer-events: none; /* clicks pass through */
+}
+
+/* Floating symbols (not yet picked) */
+.ink-child-container .floating-symbol {
+  position: absolute;
+  will-change: transform;
+}
+
+/* Placed symbols (on the logo area) */
+.ink-child-placed-symbols {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+}
+
+/* The child figure itself */
+.ink-child-figure {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  will-change: left, top, transform;
+}
+
+/* Ink trail – subtle, fading path */
+.ink-trail {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.ink-trail path {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 1.5px;
+  stroke-linecap: round;
+  filter: blur(0.8px);
+}
+
+/* Subtle breathing glow on placed symbols */
+.placed-symbol {
+  display: inline-block;
+  margin: 0 2px;
+  filter: drop-shadow(0 0 4px rgba(255, 200, 200, 0.5));
+}
+
+/* Optional: pulse on floating symbols */
+@keyframes symbolBreathe {
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.05); }
+}
+
+/* ---------- RESPONSIVE FINE-TUNING ---------- */
+@media (max-width: 600px) {
+  .intro-logo {
+    width: 220px;
+  }
+  .intro-title {
+    letter-spacing: 0.2em;
+  }
+  
+  .ink-child-placed-symbols {
+    top: 12%;
+  }
+}
